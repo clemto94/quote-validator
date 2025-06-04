@@ -1,4 +1,5 @@
 from fastapi.testclient import TestClient
+
 from main import app
 
 client = TestClient(app)
@@ -32,5 +33,10 @@ def test_invalid_quote():
     assert response.status_code == 200
     body = response.json()
     assert body["valid"] is False
-    assert "value is not a valid enumeration member" in body["errors"][0] or "Notional must be" in body["errors"][0]
+    assert (
+            "Input should be 'USD', 'EUR', 'GBP' or 'JPY'" in body["errors"] and
+            "Value error, Notional must be > 0 and < 100M" in body["errors"] and
+            "Value error, Maturity in years must be between 1 and 30" in body["errors"] and
+            "Value error, Strike must be positive" in body["errors"]
+    )
     assert body["quote_id"] == "Q002"

@@ -3,14 +3,16 @@ from pydantic import ValidationError
 from .models import Quote
 
 class ValidationService:
-    @staticmethod
-    def validate_quote(data: dict) -> dict:
+    def __init__(self):
+        self.quote = None
+
+    def validate_quote(self, data: dict) -> dict:
         try:
-            quote = Quote(**data)
+            self.quote = Quote(**data)
             return {
                 "valid": True,
                 "errors": [],
-                "quote_id": quote.quote_id
+                "quote_id": self.quote.quote_id
             }
         except ValidationError as e:
             return {

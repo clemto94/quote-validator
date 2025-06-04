@@ -1,6 +1,21 @@
+from typing import List
+
 from pydantic import BaseModel, field_validator
 from enum import Enum
 import re
+
+class QuoteRequest(BaseModel):
+    quote_id: str
+    product: str
+    currency: str
+    notional: float
+    maturity: str
+    strike: float
+
+class QuoteValidationResponse(BaseModel):
+    valid: bool
+    errors: List[str]
+    quote_id: str
 
 class Currency(str, Enum):
     USD = "USD"
