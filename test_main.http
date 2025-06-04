@@ -5,3 +5,28 @@ Accept: application/json
 
 ###
 
+POST http://127.0.0.1:8000/api/v1/quotes/validate
+Content-Type: application/json
+
+{
+  "quote_id": "Q001",
+  "product": "SWAP",
+  "currency": "USD",
+  "notional": 5000000,
+  "maturity": "5Y",
+  "strike": 102.5
+}
+
+###
+
+POST http://127.0.0.1:8000/api/v1/quotes/validate
+Content-Type: application/json
+
+{
+  "quote_id": "Q002",
+  "product": "SWAP",
+  "currency": "INVALID",
+  "notional": -1000000,
+  "maturity": "50Y",
+  "strike": -10
+}
