@@ -33,21 +33,21 @@ class Quote(BaseModel):
 
     @field_validator("notional")
     @classmethod
-    def notional_must_be_valid(cls, value):
+    def notional_must_be_valid(cls, value: float) -> float:
         if not (0 < value < 100_000_000):
             raise ValueError("Notional must be > 0 and < 100M")
         return value
 
     @field_validator("strike")
     @classmethod
-    def strike_must_be_positive(cls, value):
+    def strike_must_be_positive(cls, value: float) -> float:
         if value < 0:
             raise ValueError("Strike must be positive")
         return value
 
     @field_validator("maturity")
     @classmethod
-    def maturity_must_be_valid(cls, value):
+    def maturity_must_be_valid(cls, value: str) -> str:
         match = re.match(r"^(\d+)([DY])$", value)
         if not match:
             raise ValueError("Maturity must be in format like '30D' or '5Y'")

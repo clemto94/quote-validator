@@ -7,5 +7,5 @@ router = APIRouter(prefix="/api/v1/quotes")
 
 
 @router.post("/validate", response_model=QuoteValidationResponse)
-async def validate_quote(quote: QuoteRequest):
+async def validate_quote(quote: QuoteRequest) -> QuoteValidationResponse:
     return ValidationService().validate_quote(quote.model_dump())

@@ -1,10 +1,12 @@
 import asyncio
 from queue import Queue
+from typing import List
+from domain.models import Quote
 
-quote_queue = Queue()
-processed_quotes = []
+quote_queue: Queue[Quote] = Queue()
+processed_quotes: List[Quote] = []
 
-async def quote_worker():
+async def quote_worker()->None:
     while True:
         if not quote_queue.empty():
             quote = quote_queue.get()
