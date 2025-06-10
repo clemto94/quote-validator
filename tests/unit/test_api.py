@@ -1,9 +1,11 @@
 from fastapi.testclient import TestClient
+import pytest
 
 from main import app
 
 client = TestClient(app)
 
+@pytest.mark.unit
 def test_valid_quote():
     valid_quote = {
         "quote_id": "Q001",
@@ -20,6 +22,7 @@ def test_valid_quote():
     assert body["errors"] == []
     assert body["quote_id"] == "Q001"
 
+@pytest.mark.unit
 def test_invalid_quote():
     invalid_quote = {
         "quote_id": "Q002",

@@ -3,6 +3,7 @@ import pytest
 
 from domain.models import Quote
 
+@pytest.mark.unit
 def test_valid_quote():
     valid_quote = {
         "quote_id": "Q001",
@@ -19,6 +20,7 @@ def test_valid_quote():
     assert quote.maturity == valid_quote["maturity"]
     assert quote.strike == valid_quote["strike"]
 
+@pytest.mark.unit
 def test_invalid_notional():
     invalid_quote = {
         "quote_id": "Q002",

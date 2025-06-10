@@ -1,5 +1,4 @@
 from fastapi import APIRouter
-
 from domain.models import QuoteRequest, QuoteValidationResponse
 from domain.services import ValidationService
 
