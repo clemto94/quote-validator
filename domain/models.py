@@ -3,6 +3,9 @@ from typing import List
 from pydantic import BaseModel, field_validator
 from enum import Enum
 import re
+from sqlalchemy import Column, String, Float, Enum as SAEnum
+from infrastructure.db import Base
+from sqlalchemy.orm import mapped_column, Mapped
 
 class QuoteRequest(BaseModel):
     quote_id: str
@@ -58,3 +61,12 @@ class Quote(BaseModel):
         elif unit == "Y" and not (1 <= num <= 30):
             raise ValueError("Maturity in years must be between 1 and 30")
         return value
+
+class QuoteORM(Base):
+    __tablename__ = "quote"
+    quote_id: Mapped[str] = mapped_column(String, primary_key=True, index=True)
+    product: Mapped[str] = mapped_column(String, nullable=False)
+    currency: Mapped[Currency] = mapped_column(SAEnum(Currency), nullable=False)
+    notional: Mapped[float] = mapped_column(Float, nullable=False)
+    maturity: Mapped[str] = mapped_column(String, nullable=False)
+    strike: Mapped[float] = mapped_column(Float, nullable=False)
