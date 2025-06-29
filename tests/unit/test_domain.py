@@ -1,7 +1,7 @@
 from pydantic import ValidationError
 import pytest
 
-from domain.models import Quote
+from domain.schemas import Quote
 
 @pytest.mark.unit
 def test_valid_quote():

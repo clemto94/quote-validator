@@ -1,5 +1,5 @@
 from fastapi import APIRouter
-from domain.models import QuoteRequest, QuoteValidationResponse
+from domain.schemas import QuoteRequest, QuoteValidationResponse
 from domain.services import ValidationService
 
 router = APIRouter(prefix="/api/v1/quotes")

@@ -1,7 +1,7 @@
 from pydantic import ValidationError
 
 from infrastructure.messaging import quote_queue
-from .models import Quote
+from .schemas import Quote
 
 class ValidationService:
     def __init__(self):
